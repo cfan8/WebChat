@@ -9,12 +9,12 @@
       "keyword": "multiply",
       "pattern": "/multiply\\s+(\\d+)\\*(\\d.+)",
       "className": "com.linangran.webchat.imp.plugins.MultiplyPlugin",
-      "url": "MultiplyPlugin.groovy"
+      "url": "MultiplyPlugin.groovy"  //This Plugin is Dynamically loaded!
     },
     {
       "keyword": "reload",
       "pattern": "/reload",
-      "className": "com.linangran.webchat.imp.plugins.ReloadPlugin"
+      "className": "com.linangran.webchat.imp.plugins.ReloadPlugin" //The reload plugin will reload all plugins!
     }
   ]
 }
