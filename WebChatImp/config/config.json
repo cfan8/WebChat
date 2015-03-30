@@ -6,5 +6,5 @@
   "onReceiveClass": "listeners.onReceiveListener",
   "onDisconnectClass": "listeners.onDisconnectListener",
   "applicationContextClass": "ApplicationContext",
-  "plugins": ["weather.json", "flight.json"]
+  "extensions": "extensions.json"
 }

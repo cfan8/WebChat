@@ -9,4 +9,8 @@ public interface ApplicationContextInterface
 {
 	public UserSession getUserSession();
 
+	public void setExtensionPath(String path);
+	public void init();
+
+
 }

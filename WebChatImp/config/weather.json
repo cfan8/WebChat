@@ -1,5 +1,0 @@
-{
-  "keyword": "weather",
-  "pattern": "/weather\\s*(.+)",
-  "class": "com.linangran.webchat.imp.plugins.WeatherPlugin"
-}

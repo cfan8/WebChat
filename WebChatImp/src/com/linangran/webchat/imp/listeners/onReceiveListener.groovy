@@ -6,7 +6,8 @@ import com.linangran.webchat.base.data.ResponseMessage
 import com.linangran.webchat.base.data.UserSession
 import com.linangran.webchat.base.interfaces.*
 import com.linangran.webchat.imp.ApplicationContext
-import com.linangran.webchat.imp.ChatSession;
+import com.linangran.webchat.imp.ChatSession
+import com.linangran.webchat.imp.Extension;
 
 /**
  * Created by linangran on 3/30/2015.
@@ -39,14 +40,41 @@ class onReceiveListener extends BaseListener implements onReceiveInterface {
             String text = session.input.toString().trim();
             if (text.startsWith("/"))
             {
-                if (text.trim().equals("/quit"))
+                if (text.equals("/quit"))
                 {
                     applicationContext.usernames.remove(chatSession.username);
                     return new RequestResponse("You are logged out. Welcome again! \r\n", ResponseMessage.BROADCAST_TYPE_SHOULD_DISCONNECT);
                 }
                 else
                 {
-                    return new RequestResponse("Unrecognized Command, Please type again! \r\n", ResponseMessage.BROADCAST_TYPE_SENDER);
+                    String msg;
+                    for (Extension e: applicationContext.extensions)
+                    {
+                        if (text.startsWith("/" + e.keyword))
+                        {
+                            def m = text =~ ~e.pattern;
+                            if (!m)
+                            {
+                                msg = "Your syntax for extension " + e.keyword + "is incorrect.";
+                            }
+                            else
+                            {
+                                def param = [];
+                                for (int i = 1; i <= m.groupCount(); i++)
+                                {
+                                    param[i - 1] = m.group(i);
+                                }
+                                msg = e.plugin.onRequest(config, context, session, param);
+                                break;
+                            }
+                        }
+                    }
+                    if (msg == null)
+                    {
+                        msg = "Unrecognized Command, Please type again!";
+                    }
+                    msg += "\r\n";
+                    return new RequestResponse(msg, ResponseMessage.BROADCAST_TYPE_SENDER);
                 }
             }
             else

@@ -1,5 +1,0 @@
-{
-  "keyword": "flight",
-  "pattern": "/flight\\s+(.+)\\s+(.+)",
-  "class": "com.linangran.webchat.imp.plugins.FlightPlugin"
-}

@@ -1,0 +1,20 @@
+{
+  "extensions": [
+    {
+      "keyword": "weather",
+      "pattern": "/weather\\s*(.+)",
+      "className": "com.linangran.webchat.imp.plugins.WeatherPlugin"
+    },
+    {
+      "keyword": "multiply",
+      "pattern": "/multiply\\s+(\\d+)\\*(\\d.+)",
+      "className": "com.linangran.webchat.imp.plugins.MultiplyPlugin",
+      "url": "MultiplyPlugin.groovy"
+    },
+    {
+      "keyword": "reload",
+      "pattern": "/reload",
+      "className": "com.linangran.webchat.imp.plugins.ReloadPlugin"
+    }
+  ]
+}

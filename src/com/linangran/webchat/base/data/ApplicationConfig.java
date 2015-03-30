@@ -16,7 +16,7 @@ public class ApplicationConfig
 	public String onConnectClass;
 	public String onReceiveClass;
 	public String onDisconnectClass;
-	public List<String> queryConfigs;
+	public String extensions;
 	public String configFilePath;
 	public String applicationContextClass;
 

@@ -69,6 +69,8 @@ public class ServerStart
 					applicationConfig.onDisconnectInterface = (onDisconnectInterface) Class.forName(applicationConfig.packagePrefix + "." + applicationConfig.onDisconnectClass).newInstance();
 					applicationConfig.onReceiveInterface = (onReceiveInterface) Class.forName(applicationConfig.packagePrefix + "." + applicationConfig.onReceiveClass).newInstance();
 					applicationContext = (ApplicationContextInterface) Class.forName(applicationConfig.packagePrefix + "." + applicationConfig.applicationContextClass).newInstance();
+					applicationContext.setExtensionPath(new File(applicationfile, "../" + applicationConfig.extensions).getAbsolutePath());
+					applicationContext.init();
 				}
 				catch (Exception e)
 				{
