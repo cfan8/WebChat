@@ -1,12 +1,11 @@
 package com.linangran.webchat.base;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.linangran.webchat.base.data.ApplicationConfig;
 import com.linangran.webchat.base.data.ServerConfig;
+import com.linangran.webchat.base.interfaces.*;
 
 import java.io.*;
-import java.util.List;
 
 /**
  * Created by linangran on 3/30/2015.
@@ -62,9 +61,25 @@ public class ServerStart
 				{
 					e.printStackTrace();
 				}
-				WebChatServer webChatServer = new WebChatServer(serverConfig.port, serverConfig.expire, applicationConfig);
-				Logger.log("Server started.");
+				Logger.log("Initialization Listeners.");
+				ApplicationContextInterface applicationContext = null;
+				try
+				{
+					applicationConfig.onConnectInterface = (onConnectInterface) Class.forName(applicationConfig.packagePrefix + "." + applicationConfig.onConnectClass).newInstance();
+					applicationConfig.onDisconnectInterface = (onDisconnectInterface) Class.forName(applicationConfig.packagePrefix + "." + applicationConfig.onDisconnectClass).newInstance();
+					applicationConfig.onReceiveInterface = (onReceiveInterface) Class.forName(applicationConfig.packagePrefix + "." + applicationConfig.onReceiveClass).newInstance();
+					applicationContext = (ApplicationContextInterface) Class.forName(applicationConfig.packagePrefix + "." + applicationConfig.applicationContextClass).newInstance();
+				}
+				catch (Exception e)
+				{
+					Logger.err("Error Loading Listeners." + e.toString());
+					return;
+				}
+				Logger.log("Listeners Initialized.");
+				WebChatServer webChatServer = new WebChatServer(serverConfig.port, serverConfig.expire, applicationConfig, applicationContext);
+				applicationConfig.configFilePath = applicationfile.getAbsolutePath();
 				webChatServer.start();
+				Logger.log("Server started.");
 			}
 		}
 		return;

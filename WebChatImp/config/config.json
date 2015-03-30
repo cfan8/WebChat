@@ -1,7 +1,10 @@
 {
-  "greeting": "Hello World!",
-  "package": "com.linangran.webchat.imp",
-  "onLogin": ["listeners.OnUserLoginListener"],
-  "onLogoff": [],
-  "queryConfigs": []
+  "greeting": "Hello World! Please Enter Your Username: \r\n",
+  "loginWelcome": "Welcome to the chatroom.",
+  "packagePrefix": "com.linangran.webchat.imp",
+  "onConnectClass": "listeners.onConnectListener",
+  "onReceiveClass": "listeners.onReceiveListener",
+  "onDisconnectClass": "listeners.onDisconnectListener",
+  "applicationContextClass": "ApplicationContext",
+  "plugins": ["weather.json", "flight.json"]
 }

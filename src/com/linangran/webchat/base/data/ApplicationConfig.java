@@ -1,5 +1,8 @@
 package com.linangran.webchat.base.data;
 
+import com.linangran.webchat.base.interfaces.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,9 +10,17 @@ import java.util.List;
  */
 public class ApplicationConfig
 {
-	String greeting;
-	List<String> onLoginListeners;
-	List<String> onLogoffListeners;
-	List<String> queryConfigs;
-	String configFilePath;
+	public String greeting;
+	public String loginWelcome;
+	public String packagePrefix;
+	public String onConnectClass;
+	public String onReceiveClass;
+	public String onDisconnectClass;
+	public List<String> queryConfigs;
+	public String configFilePath;
+	public String applicationContextClass;
+
+	public onConnectInterface onConnectInterface;
+	public onDisconnectInterface onDisconnectInterface;
+	public onReceiveInterface onReceiveInterface;
 }
