@@ -18,4 +18,5 @@ To further increase the performance, we could partition users by IP or topics so
 
 ## To be improved
 The main thread will be blocked when plugins are fetching Internet data. The best practice here is to change this part to event-driven non-blocking code.
+Since disconnected users are not handled, there is a potential of memory leak in the HashMap of WebChatServer and HashSet of ApplicationContext.
  
